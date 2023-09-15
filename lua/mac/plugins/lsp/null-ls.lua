@@ -22,7 +22,7 @@ return {
         diagnostics.mypy.with({
           extra_filetypes = { "py" },
         }),
-         diagnostics.ruff.with({
+        diagnostics.ruff.with({
           extra_filetypes = { "py" },
         }),
         --  to disable file types use
@@ -31,6 +31,7 @@ return {
           extra_filetypes = { "svelte" },
         }), -- js/ts formatter
         formatting.stylua, -- lua formatter
+        formatting.black,
         diagnostics.eslint_d.with({ -- js/ts linter
           condition = function(utils)
             return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs" }) -- only enable if root has .eslintrc.js or .eslintrc.cjs

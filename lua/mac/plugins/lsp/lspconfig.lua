@@ -19,6 +19,9 @@ return {
       opts.buffer = bufnr
 
       -- set keybinds
+      opts.desc = "Format"
+      keymap.set("n", "<leader>lf", vim.lsp.buf.format, opts) -- show definition, references
+      
       opts.desc = "Show LSP references"
       keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", opts) -- show definition, references
 
