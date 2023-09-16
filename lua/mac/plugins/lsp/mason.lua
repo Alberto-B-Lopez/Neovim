@@ -9,8 +9,7 @@ return {
   dependencies = {
     "williamboman/mason-lspconfig.nvim",
   },
-  config = function()
-    -- import mason
+  config = function() -- import mason
     local mason = require("mason")
 
     -- import mason-lspconfig

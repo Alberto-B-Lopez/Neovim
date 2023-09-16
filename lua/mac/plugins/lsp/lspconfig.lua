@@ -127,6 +127,16 @@ return {
     lspconfig["pyright"].setup({
       capabilities = capabilities,
       on_attach = on_attach,
+      settings = {
+        pyright = { autoImportCompletion = true, },
+        python = {
+          analysis = {
+            autoSearchPaths = true,
+            diagnosticMode = 'openFilesOnly',
+            useLibraryCodeForTypes = false,
+            typeCheckingMode = 'off'}
+        }
+      } 
     })
 
     -- configure lua server (with special settings)
