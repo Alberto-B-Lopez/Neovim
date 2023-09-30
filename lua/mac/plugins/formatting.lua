@@ -25,7 +25,7 @@ return {
 			},
 		})
 
-		keymap.set({ "n", "v" }, "<leader>lf", function()
+		keymap.set({ "n", "v" }, "<leader>if", function()
 			conform.format({
 				lsp_fallback = true,
 				async = false,
