@@ -35,7 +35,6 @@ return {
 				"graphql",
 				"emmet_ls",
 				"prismals",
-				"flake8",
 				"pyright",
 			},
 			-- auto-install configured servers (with lspconfig)

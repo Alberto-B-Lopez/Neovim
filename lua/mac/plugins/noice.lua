@@ -13,6 +13,7 @@ return {
 		},
 		popupmenu = {
 			enabled = true,
+			backend = "nui",
 		},
 		notify = {
 			enabled = false,
