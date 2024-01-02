@@ -1,54 +1,39 @@
 return {
 	"ThePrimeagen/harpoon",
+	branch = "harpoon2",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 	},
-	opts = {
-		-- sets the marks upon calling `toggle` on the ui, instead of require `:w`.
-		save_on_toggle = false,
-
-		-- saves the harpoon file upon every change. disabling is unrecommended.
-		save_on_change = true,
-
-		-- sets harpoon to run the command immediately as it's passed to the terminal when calling `sendCommand`.
-		enter_on_sendcmd = false,
-
-		-- closes any tmux windows harpoon that harpoon creates when you close Neovim.
-		tmux_autoclose_windows = false,
-
-		-- filetypes that you want to prevent from adding to the harpoon list menu.
-		excluded_filetypes = { "harpoon" },
-
-		--set marks specific to each git branch inside git repository
-		mark_branch = true,
-
-		-- enable tabline with harpoon marks
-		tabline = true,
-		tabline_prefix = "   ",
-		tabline_suffix = "   ",
-	},
 	config = function()
-		-- set keymaps
-		local keymap = vim.keymap -- for conciseness
+		local harpoon = require("harpoon")
 
-		keymap.set("n", "m", "<cmd>lua require('harpoon.mark').add_file()<cr>", { desc = "Mark file with harpoon" })
-		keymap.set(
-			"n",
-			"<leader>hn",
-			"<cmd>lua require('harpoon.ui').nav_next()<cr>",
-			{ desc = "Go to next harpoon mark" }
-		)
-		keymap.set(
-			"n",
-			"<leader>hp",
-			"<cmd>lua require('harpoon.ui').nav_prev()<cr>",
-			{ desc = "Go to previous harpoon mark" }
-		)
-		keymap.set(
-			"n",
-			"<leader>hx",
-			"<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>",
-			{ desc = "toggles harpoon quick menu" }
-		)
+		-- REQUIRED
+		harpoon.setup({
+			settings = {
+				save_on_toggle = true,
+			},
+		})
+		-- REQUIRED
+
+		vim.keymap.set("n", "<leader>ha", function()
+			harpoon:list():append()
+		end)
+		vim.keymap.set("n", "<C-e>", function()
+			harpoon.ui:toggle_quick_menu(harpoon:list())
+		end)
+
+		vim.keymap.set("n", "1", function()
+			harpoon:list():select(1)
+		end)
+		vim.keymap.set("n", "2", function()
+			harpoon:list():select(2)
+		end)
+		-- Toggle previous & next buffers stored within Harpoon list
+		vim.keymap.set("n", "<C-S-P>", function()
+			harpoon:list():prev()
+		end)
+		vim.keymap.set("n", "<C-S-N>", function()
+			harpoon:list():next()
+		end)
 	end,
 }

@@ -132,6 +132,24 @@ return {
 		})
 
 		-- configure python server
+		lspconfig["gopls"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "go", "gomod", "gowork", "gotmpl" },
+			settings = {
+				gopls = {
+					completeUnimported = true,
+					usePlaceholders = true,
+					analyses = {
+						unusedparams = true,
+					},
+					staticcheck = true,
+					gofumpt = true,
+				},
+			},
+		})
+
+		-- configure python server
 		lspconfig["pyright"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
