@@ -8,11 +8,13 @@ return {
 		conform.setup({
 			formatters_by_ft = {
 				javascript = { "prettier" },
+				templ = { "templ" },
 				typescript = { "prettier" },
 				svelte = { "prettier" },
 				css = { "prettier" },
 				html = { "prettier" },
 				json = { "prettier" },
+				sql = { "sqlfluff" },
 				yaml = { "prettier" },
 				markdown = { "prettier" },
 				lua = { "stylua" },

@@ -9,6 +9,7 @@ return {
 			javascript = { "eslint_d" },
 			typescript = { "eslint_d" },
 			svelte = { "eslint_d" },
+			sql = { "sqlfluff" },
 			python = { "flake8" },
 		}
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

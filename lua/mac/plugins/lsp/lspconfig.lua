@@ -14,6 +14,26 @@ return {
 
 		local keymap = vim.keymap -- for conciseness
 
+		-- custom format for templ files
+		local custom_format = function()
+			if vim.bo.filetype == "templ" then
+				local bufnr = vim.api.nvim_get_current_buf()
+				local filename = vim.api.nvim_buf_get_name(bufnr)
+				local cmd = "templ fmt " .. vim.fn.shellescape(filename)
+
+				vim.fn.jobstart(cmd, {
+					on_exit = function()
+						-- Reload the buffer only if it's still the current buffer
+						if vim.api.nvim_get_current_buf() == bufnr then
+							vim.cmd("e!")
+						end
+					end,
+				})
+			else
+				vim.lsp.buf.format()
+			end
+		end
+
 		local opts = { noremap = true, silent = true }
 		local on_attach = function(client, bufnr)
 			opts.buffer = bufnr
@@ -59,6 +79,9 @@ return {
 			keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
 		end
 
+		-- add templ filetype
+		vim.filetype.add({ extension = { templ = "templ" } })
+
 		-- used to enable autocompletion (assign to every lsp server config)
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 
@@ -74,6 +97,13 @@ return {
 		lspconfig["html"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
+			filetypes = { "html", "templ" },
+		})
+
+		lspconfig["templ"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			vim.api.nvim_create_autocmd({ "BufWritePre" }, { pattern = { "*.templ" }, callback = custom_format }),
 		})
 
 		-- configure typescript server with plugin
@@ -92,6 +122,14 @@ return {
 		lspconfig["tailwindcss"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
+			filetypes = { "html", "templ" },
+			init_options = { userLanguages = { templ = "html" } },
+		})
+
+		lspconfig["sqlls"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "sql", "sas" },
 		})
 
 		-- configure svelte server
