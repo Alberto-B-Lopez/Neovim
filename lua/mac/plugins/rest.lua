@@ -48,6 +48,6 @@ return {
 			search_back = true,
 		})
 
-		keymap.set("n", "<leader>xr", "<Plug>RestNvim", { desc = "Select all" })
+		keymap.set("n", "<leader>rr", "<Plug>RestNvim", { desc = "Select all" })
 	end,
 }

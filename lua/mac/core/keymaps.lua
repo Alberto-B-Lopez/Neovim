@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.api.nvim_set_keymap("n", "<leader>r", [[:w<CR>:!python3 %<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>rp", [[:w<CR>:!python3 %<CR>]], { noremap = true, silent = true })
 
 local keymap = vim.keymap -- for conciseness
 
