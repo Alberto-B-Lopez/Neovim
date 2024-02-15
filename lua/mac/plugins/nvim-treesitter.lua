@@ -32,7 +32,6 @@ return {
 						"svelte",
 						"vue",
 						"tsx",
-						"templ",
 						"rescript",
 						"xml",
 						"sql",
