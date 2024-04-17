@@ -1,5 +1,13 @@
 local opt = vim.opt -- for conciseness
 
+vim.g.netrw_browse_split = 0
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 25
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwSettings = 1
+-- vim.g.loaded_netrwPlugin = 1
+-- vim.g.loaded_netrwFileHandlers = 1
+
 -- line numbers
 opt.relativenumber = true -- show relative line numbers
 opt.number = true -- shows absolute line number on cursor line (when relative number is on)
@@ -16,6 +24,8 @@ opt.wrap = false -- disable line wrapping
 -- search settings
 opt.ignorecase = true -- ignore case when searching
 opt.smartcase = true -- if you include mixed case in your search, assumes you want case-sensitive
+opt.incsearch = true -- show search matches as you type
+opt.hlsearch = false -- highlight all matches on screen
 
 -- cursor line
 opt.cursorline = true -- highlight the current cursor line
