@@ -106,10 +106,36 @@ return {
 			vim.api.nvim_create_autocmd({ "BufWritePre" }, { pattern = { "*.templ" }, callback = custom_format }),
 		})
 
+		lspconfig["eslint_d"].setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "javascript" },
+		})
+
 		-- configure typescript server with plugin
 		lspconfig["tsserver"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
+			filetypes = { "typescript", "javascript" },
+			initializationOptions = {
+				preferences = {
+					importModuleSpecifierPreference = "non-relative",
+				},
+			},
+			vim.api.nvim_create_autocmd("BufWritePre", {
+				group = vim.api.nvim_create_augroup("TS_add_missing_imports", { clear = true }),
+				desc = "TS_add_missing_imports",
+				pattern = { "*.js", "*.ts" },
+				callback = function()
+					vim.lsp.buf.code_action({
+						apply = true,
+						context = {
+							only = { "source.addMissingImports.ts" },
+						},
+					})
+					vim.cmd("write")
+				end,
+			}),
 		})
 
 		-- configure css server

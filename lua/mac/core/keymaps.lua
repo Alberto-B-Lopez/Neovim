@@ -12,19 +12,8 @@ keymap.set("n", "<C-_>", function()
 	require("Comment.api").toggle.linewise.current()
 end, { noremap = true, silent = true })
 
--- Netrw Normal Mode
-keymap.set("n", "<leader>ee", ":Explore<CR>", { desc = "Open Netrw" })
-vim.keymap.set("n", "<leader>ma", function()
-	local bufnr = vim.api.nvim_get_current_buf()
-	local buftype = vim.api.nvim_buf_get_option(bufnr, "buftype")
-	if buftype == "nofile" then
-		local dir = vim.fn.expand("%:p:h")
-		vim.cmd("call mkdir('" .. dir .. "', 'p')")
-		vim.cmd("enew")
-	else
-		vim.notify("This mapping only works in the Netrw buffer", vim.log.levels.WARN)
-	end
-end, { desc = "Create a new file in Netrw" })
+-- Oil Normal Mode
+keymap.set("n", "<leader>ee", "<CMD>Oil<CR>", { desc = "Open Oil" })
 
 -- Visual mode
 keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move line down" })
