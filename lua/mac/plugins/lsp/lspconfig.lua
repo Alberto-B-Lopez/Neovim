@@ -8,6 +8,31 @@ return {
 	config = function()
 		-- import lspconfig plugin
 		local lspconfig = require("lspconfig")
+		-- Angular
+		local ok, mason_registry = pcall(require, "mason-registry")
+		if not ok then
+			vim.notify("Mason registry not found", vim.log.levels.ERROR)
+			return
+		end
+
+		local angularls_path = mason_registry.get_package("angular-language-server"):get_install_path()
+
+		local lsp_location = table.concat({
+			angularls_path,
+			vim.fn.getcwd(),
+		}, ",")
+
+		local ngls_cmd = {
+			"ngserver",
+			"--stdio",
+			"--tsProbeLocations",
+			lsp_location,
+			"--ngProbeLocations",
+			lsp_location,
+			"--includeCompletionsWithSnippetText",
+			"--includeAutomaticOptionalChainCompletions",
+			"--logToConsole",
+		}
 
 		-- import cmp-nvim-lsp plugin
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
@@ -110,6 +135,16 @@ return {
 			capabilities = capabilities,
 			on_attach = on_attach,
 			filetypes = { "javascript" },
+		})
+		-- Angular Language Server
+		lspconfig["angularls"].setup({
+			cmd = ngls_cmd,
+			capabilities = capabilities,
+			on_attach = on_attach,
+			on_new_config = function(new_config, _)
+				new_config.cmd = ngls_cmd
+			end,
+			filetypes = { "html" },
 		})
 
 		-- configure typescript server with plugin
