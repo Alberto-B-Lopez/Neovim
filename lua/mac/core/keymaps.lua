@@ -34,7 +34,7 @@ keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- Zoxide
 local function zoxide_explore(directory)
 	local dir = vim.fn.trim(vim.fn.system("zoxide query " .. (directory or "")))
-	vim.cmd("Explore " .. dir)
+	vim.cmd("Oil" .. dir)
 end
 
 vim.keymap.set("n", "<leader>z", function()
