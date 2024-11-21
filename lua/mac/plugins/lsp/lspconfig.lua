@@ -151,7 +151,7 @@ return {
 		lspconfig["tsserver"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
-			filetypes = { "typescript", "javascript" },
+			filetypes = { "typescriptreact", "typescript", "javascript" },
 			initializationOptions = {
 				preferences = {
 					importModuleSpecifierPreference = "non-relative",
@@ -160,7 +160,7 @@ return {
 			vim.api.nvim_create_autocmd("BufWritePre", {
 				group = vim.api.nvim_create_augroup("TS_add_missing_imports", { clear = true }),
 				desc = "TS_add_missing_imports",
-				pattern = { "*.js", "*.ts" },
+				pattern = { "*.js", "*.ts", "*.tsx" },
 				callback = function()
 					vim.lsp.buf.code_action({
 						apply = true,
@@ -183,7 +183,7 @@ return {
 		lspconfig["tailwindcss"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
-			filetypes = { "html", "templ" },
+			filetypes = { "html", "templ", "typescriptreact" },
 			init_options = { userLanguages = { templ = "html" } },
 		})
 
@@ -224,11 +224,11 @@ return {
 		})
 
 		-- configure emmet language server
-		lspconfig["emmet_ls"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
-		})
+		-- lspconfig["emmet_ls"].setup({
+		-- 	capabilities = capabilities,
+		-- 	on_attach = on_attach,
+		-- 	filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+		-- })
 
 		-- configure python server
 		lspconfig["gopls"].setup({

@@ -10,6 +10,7 @@ return {
 				javascript = { "prettier" },
 				templ = { "templ" },
 				typescript = { "prettier" },
+				typescriptreact = { "prettier" },
 				svelte = { "prettier" },
 				css = { "prettier" },
 				html = { "prettier" },
