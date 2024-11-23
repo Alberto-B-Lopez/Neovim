@@ -2,7 +2,6 @@ return {
 	"folke/noice.nvim",
 	event = "VeryLazy",
 	opts = {
-		-- add any options here
 		presets = {
 			long_message_to_split = true,
 			bottom_search = true,

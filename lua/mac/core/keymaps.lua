@@ -11,6 +11,8 @@ keymap.set("i", "<C-b>", "<Left>", { desc = "Moves left in insert mode" })
 keymap.set("n", "<C-_>", function()
 	require("Comment.api").toggle.linewise.current()
 end, { noremap = true, silent = true })
+keymap.set("n", "]]", "][", { desc = "Next Function" })
+keymap.set("n", "[[", "[]", { desc = "Previous Function" })
 
 -- Oil Normal Mode
 keymap.set("n", "<leader>ee", "<CMD>Oil<CR>", { desc = "Open Oil" })
