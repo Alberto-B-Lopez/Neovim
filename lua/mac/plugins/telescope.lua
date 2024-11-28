@@ -13,7 +13,7 @@ return {
 
 		telescope.setup({
 			defaults = {
-				file_ignore_pattern = { " git/", "node _modules" },
+				file_ignore_patterns = { "node_modules", ".git" },
 				layout_config = {
 					height = 0.90,
 					width = 0.90,
