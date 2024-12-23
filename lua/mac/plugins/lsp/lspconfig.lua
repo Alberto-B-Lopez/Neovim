@@ -59,6 +59,8 @@ return {
 			end
 		end
 
+		-- make sure on save it auto imports for go
+
 		local opts = { noremap = true, silent = true }
 		local on_attach = function(client, bufnr)
 			opts.buffer = bufnr
@@ -230,10 +232,26 @@ return {
 		-- 	filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
 		-- })
 
-		-- configure python server
 		lspconfig["gopls"].setup({
 			capabilities = capabilities,
-			on_attach = on_attach,
+			on_attach = function(client, bufnr)
+				-- your shared on_attach logic
+				on_attach(client, bufnr)
+
+				-- Auto-organize imports (add missing + remove unused) and then format on save
+				vim.api.nvim_create_autocmd("BufWritePre", {
+					buffer = bufnr,
+					callback = function()
+						-- first organize imports
+						vim.lsp.buf.code_action({
+							context = { only = { "source.organizeImports" } },
+							apply = true,
+						})
+						-- then format
+						vim.lsp.buf.format({ async = false })
+					end,
+				})
+			end,
 			filetypes = { "go", "gomod", "gowork", "gotmpl" },
 			settings = {
 				gopls = {

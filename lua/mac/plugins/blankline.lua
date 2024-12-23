@@ -1,13 +1,13 @@
 return {
-	"lukas-reineke/indent-blankline.nvim",
-	main = "ibl",
-	opts = {
-		indent = {
-			char = "|",
-		},
-		scope = {
-			enabled = false,
-			show_start = false,
-		},
-	},
+	-- "lukas-reineke/indent-blankline.nvim",
+	-- main = "ibl",
+	-- opts = {
+	-- 	indent = {
+	-- 		char = "|",
+	-- 	},
+	-- 	scope = {
+	-- 		enabled = false,
+	-- 		show_start = false,
+	-- 	},
+	-- },
 }
